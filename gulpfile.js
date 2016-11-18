@@ -6,9 +6,17 @@ var changed = require('gulp-changed');
 var cached = require('gulp-cached');
 var gulpif = require('gulp-if');
 var filter = require('gulp-filter');
+var debug = require('gulp-debug');
 
 gulp.task('jade', function() {
     return gulp.src('app/**/*.pug')
+
+        .pipe(
+          plumber( function(error) {
+            gutil.log(error.message);
+            this.emit('end');
+          })
+        )
 
         //only pass unchanged *main* files and *all* the partials
         .pipe(changed('dist', {extension: '.html'}))
