@@ -25,6 +25,8 @@ gulp.task('jade', function() {
         //filter out unchanged partials, but it only works when watching
         .pipe(gulpif(global.isWatching, cached('jade')))
 
+        .pipe(debug({title: 'debug-before'}))
+
         //find files that depend on the files that have changed
         .pipe(pugInheritance({basedir: 'app', extension: '.pug', skip:'node_modules'}))
 
