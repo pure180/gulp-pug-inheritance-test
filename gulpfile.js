@@ -7,6 +7,7 @@ var cached = require('gulp-cached');
 var gulpif = require('gulp-if');
 var filter = require('gulp-filter');
 var debug = require('gulp-debug');
+var plumber = require('gulp-plumber');
 var notify = require('gulp-notify');
 
 gulp.task('jade', function() {
@@ -42,7 +43,8 @@ gulp.task('jade', function() {
         .pipe(jade())
 
         //save all the files
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist'))
+        .pipe(notify({message: 'Served "<%= file.path %>"'}));
 });
 gulp.task('setWatch', function() {
     global.isWatching = true;
