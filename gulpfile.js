@@ -7,6 +7,7 @@ var cached = require('gulp-cached');
 var gulpif = require('gulp-if');
 var filter = require('gulp-filter');
 var debug = require('gulp-debug');
+var notify = require('gulp-notify');
 
 gulp.task('jade', function() {
     return gulp.src('app/**/*.pug')
@@ -27,11 +28,14 @@ gulp.task('jade', function() {
         //find files that depend on the files that have changed
         .pipe(pugInheritance({basedir: 'app', extension: '.pug', skip:'node_modules'}))
 
+        .pipe(debug({title: 'debug-after'}))
+
         //filter out partials (folders and files starting with "_" )
         .pipe(filter(function (file) {
             return !/\/_/.test(file.path) && !/^_/.test(file.relative);
         }))
 
+        .pipe(debug({title: 'debug-after-filter'}))
         //process jade templates
         .pipe(jade())
 
