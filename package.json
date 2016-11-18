@@ -15,6 +15,6 @@
     "gulp-filter": "^4.0.0",
     "gulp-if": "^2.0.1",
     "gulp-pug": "^3.0.2",
-    "gulp-pug-inheritance": "^0.1.1"
+    "gulp-pug-inheritance": "^0.2.0"
   }
 }
